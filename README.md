@@ -4,7 +4,9 @@ The COVID-19 Open Research Dataset (CORD-19) is a freely available dataset conta
 
 The full-text scholarly articles are stored as JSON files in the CORD-19 dataset. It can often become troublesome to analyze and retrieve information about papers that are stored in JSON format. Thus, this repository contains codes that can used to convert the full-text JSON formatted papers from the Cord-19 dataset into a Sqlite3 database in Python. 
 
-This codebase first extracts the information within the JSON files as a pandas Dataframe, and then these Dataframes are used to create the final Sqlite3 database. The Sqlite3 database distributes the full-text information into separate tables, such as tables for paper abstracts, authors, body text, citations, etc. These tables can be easily queried using the 'paper_id' to obtain specific pieces of information about a paper.
+This codebase first extracts the information within the JSON files as a pandas Dataframe, and then these Dataframes are used to create the final Sqlite3 database. The Sqlite3 database distributes the full-text information into separate tables, such as tables for paper abstracts, authors, body text, citations, etc. These tables can be easily queried using the 'paper_id' to obtain specific pieces of information about a paper. A schema of the database is given below-
+
+![Alt text](Database_Schema.png)
 
 ## Code Description
 
