@@ -14,11 +14,19 @@ Firstly, the dataset needs to be [downloaded](https://www.kaggle.com/datasets/al
 - In order to run the scripts, the following variables need to be adjusted:
   - __*source*__ - Set the "source" variable to the location of the "pdf_json" or "pmc_json" folders on your system. The scripts will process all the JSON files present within the source folder.
 
-    **Note:** Most script files contain two instances of the "source" variable (one inside the *process_file()* method and one towards the end of the script), both of which need to point to the same folder. The exceptions are the "extract_ref_spans.py" and "extract_cite_spans.py" scripts, where the "source" variables are replaced by a single "path" variable within the *main()* method.
+    **Note:** Most scripts contain two instances of the "source" variable (one inside the *process_file()* method and one towards the end of the script), both of which need to point to the same folder. The exceptions are the "extract_ref_spans.py" and "extract_cite_spans.py" scripts, where the "source" variables are replaced by a single "path" variable within the *main()* method.
     
   - __*chunksize*__ - As the dataset contains hundreds of thousands of JSON files, it is not possible to process all the files at once. Thus, some script files contain the "chunksize" variable to indicate the number of files to be processed at once. This variable needs to be set based on the available system memory. It is set to 30000 as a default, which works for systems with 16GB of RAM.
 
+  - __*start*__ - This variable is present within the "extract_body_texts.py" file. This variable is used to set the unique "text_id" for each span of text within the "body_text" table. Initially, this variable needs to be set to 0. But, as the script needs to be run twice (once for "pdf_json" folder and another for "pmc_json" folder), during the 2nd run, the "start" variable needs to be set to the number of rows (text_ids) that were extracted from the first folder. However, all the JSON files can be moved to a single folder to simplify this process. In that case, simply set "start" to 0 as a starting point.
+
+  - All the scripts also use the *to_csv()* method to save the dataframes as a csv file. Please ensure that the location for saving the csv file is set correctly.
+
 - The scripts also utilize multi-processing to use multiple CPU cores in order to make processing of the JSON files significantly faster. Therefore, most scripts contain the following line of code: ``with concurrent.futures.ProcessPoolExecutor(9) as executor:``. Here, the number inside the parentheses needs to be less than or equal to the number of available cores on the system's CPU.
+
+- After extracting all the Dataframes using the Python scripts, run the "Create Sqlite Database.ipynb" notebook to create the Sqlite3 Database from the created csv files.
+
+  **Note:** The csv files should be organized into separate folders (for each SQL table) if the save paths within the *to_csv()* methods were set appropriately in the data extraction scripts.
 
 ## Acknowledgement
 
