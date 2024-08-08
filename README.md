@@ -24,7 +24,7 @@ Firstly, the dataset needs to be [downloaded](https://www.kaggle.com/datasets/al
 
   - All the scripts also use the *to_csv()* method to save the dataframes as a csv file. Please ensure that the location for saving the csv file is set correctly.
 
-- The scripts also utilize **multi-processing** to use multiple CPU cores in order to make processing of the JSON files significantly faster. Therefore, most scripts contain the following line of code: ``with concurrent.futures.ProcessPoolExecutor(9) as executor:``. Here, the number inside the parentheses needs to be less than or equal to the number of available cores on the system's CPU.
+- The scripts also utilize **multi-processing** to use multiple CPU cores in order to make processing of the JSON files significantly faster. Therefore, most scripts contain the following line of code: ``with concurrent.futures.ProcessPoolExecutor(9) as executor:``. Here, the number inside the parentheses needs to be less than or equal to the number of available threads on the system's CPU.
 
 - After extracting all the Dataframes using the Python scripts, run the **"Create Sqlite Database.ipynb"** notebook to create the Sqlite3 Database from the created csv files.
 
